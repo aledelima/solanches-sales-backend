@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  sales-api:
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+
+  database:
+    container_name: solanches_mysql
+    image: mysql:5.7.36
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=dbsolanches
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - solanches-backend-db-prod:/var/lib/mysql
+      - ./mysql-restorage:/docker-entrypoint-initdb.d
+volumes:
+  solanches-mysql-prod:

@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:mysql://dbhost:3307/dbsolanches
+    username: dev_user
+    password: dev_password
